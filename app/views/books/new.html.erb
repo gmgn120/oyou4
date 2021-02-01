@@ -1,0 +1,32 @@
+<h1>書籍の新規登録</h1>
+<%= form_tag('/booksearch', method: :get) do %>
+<div class="input-group">
+      <%= search_field_tag "keyword", params[:keyword], class: "form-control", placeholder: "キーワード検索" %>
+<span class="input-group-btn">
+          <%= submit_tag "検索", class: "btn btn-primary" %>
+</span>
+</div>
+<% end %>
+<h2>検索結果</h2>
+<% if @books.present? %>
+<% @books.each do |book| %>
+<img src="<%= book[1] %>" width="40" vspace="2">
+     <%= book[0] %> |
+<%= book[2] %> | 
+     <%= book[3] %> <br>
+<% end %>
+<% end %>
+
+<%= form_with scope: :book, url: books_path, local: true do |form| %>
+  <%= form.label :title %>
+<%= form.text_field :title, class: 'form-control', value: "#{@title}" %>
+
+  <%= form.label :author %>
+<%= form.text_field :author, class: 'form-control', value: "#{@author}" %>
+
+  <%= form.label :code %>
+<%= form.text_field :code, class: 'form-control', value: "#{@code}" %>
+
+  <%= form.hidden_field :img, class: 'form-control', value: "#{@img}" %>
+<%= form.submit "Save Book", class: "btn btn-primary" %>
+<% end %>
