@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/booksearch', to: 'books#new'
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
-     get :follows, on: :member
-     get :followers, on: :member
-   end
+    get :follows, on: :member
+    get :followers, on: :member
+  end
 end
