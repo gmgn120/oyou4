@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
   end
   get '/booksearch', to: 'books#new'
+  get '/booksearch2', to: 'books#new2'
+  get '/books2', to: 'books#index2'
+  post 'edit_book2', to: 'books#create2'
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
     get :follows, on: :member

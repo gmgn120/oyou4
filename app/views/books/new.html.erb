@@ -7,26 +7,17 @@
 </span>
 </div>
 <% end %>
-<h2>検索結果</h2>
 <% if @books.present? %>
-<% @books.each do |book| %>
-<img src="<%= book[1] %>" width="40" vspace="2">
-     <%= book[0] %> |
-<%= book[2] %> | 
-     <%= book[3] %> <br>
+  <h2>検索結果</h2>
+  <% @books.each do |book| %>
+    <%= form_with model:@book, url: edit_book2_path, method: :post, local: true do |f| %>
+      <img src="<%= book[1] %>" width="80" vspace="3">
+      <%= book[0] %> |
+      <%= book[2] %> |
+      <%= f.hidden_field :title, value: book[0] %>
+      <%= f.hidden_field :body, value: book[2] %>
+      <%= f.submit "追加", class: "btn btn-primary" %><br>
+    <% end %>
+  <% end %>
 <% end %>
-<% end %>
 
-<%= form_with scope: :book, url: books_path, local: true do |form| %>
-  <%= form.label :title %>
-<%= form.text_field :title, class: 'form-control', value: "#{@title}" %>
-
-  <%= form.label :author %>
-<%= form.text_field :author, class: 'form-control', value: "#{@author}" %>
-
-  <%= form.label :code %>
-<%= form.text_field :code, class: 'form-control', value: "#{@code}" %>
-
-  <%= form.hidden_field :img, class: 'form-control', value: "#{@img}" %>
-<%= form.submit "Save Book", class: "btn btn-primary" %>
-<% end %>

@@ -62,10 +62,25 @@ class BooksController < ApplicationController
         @books[x][3] = @bookjson.dig("items", x, "volumeInfo", "industryIdentifiers", 0, "identifier")
       end
     end
-    @title = params[:title] if params[:title].present?
-    @code = params[:code] if params[:code].present?
-    @author = params[:author] if params[:author].present?
-    @img = params[:img] if params[:img].present?
+  end
+  
+  def create2
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
+      redirect_to booksearch2_path, notice: "You have created book successfully."
+    else
+      @books = Book.all
+      render 'index'
+    end
+  end
+  
+  def new2
+    
+  end
+  
+  def index2
+    @books = Book.all
   end
 
   private
