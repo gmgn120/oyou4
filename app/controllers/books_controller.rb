@@ -60,6 +60,7 @@ class BooksController < ApplicationController
         @books[x][2] = @bookjson.dig("items", x, "volumeInfo", "authors")
         @books[x][2] = @books[x][2].join(',') if @books[x][2] # 複数著者をカンマで区切る
         @books[x][3] = @bookjson.dig("items", x, "volumeInfo", "industryIdentifiers", 0, "identifier")
+        @books[x][4] = @bookjson.dig("items", x, "volumeInfo", "description")
       end
     end
   end
@@ -86,7 +87,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :description, :image_id)
   end
 
   def ensure_correct_user

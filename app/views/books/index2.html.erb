@@ -1,5 +1,7 @@
 <h1>本棚</h1>
 <% @books.each do |book| %>
+  <img src="<%= book.image_id %>" width="80" vspace="3">
   <%= book.title %>
-  <%= book.body %><br>
+  <%= book.body %>
+  <%= book.description %><br>
 <% end %>

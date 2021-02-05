@@ -16,6 +16,8 @@
       <%= book[2] %> |
       <%= f.hidden_field :title, value: book[0] %>
       <%= f.hidden_field :body, value: book[2] %>
+      <%= f.hidden_field :image_id, value: book[1] %>
+      <%= f.hidden_field :description, value: book[4] %>
       <%= f.submit "追加", class: "btn btn-primary" %><br>
     <% end %>
   <% end %>
